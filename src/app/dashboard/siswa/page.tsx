@@ -43,7 +43,7 @@ const SiswaPage = () => {
       const data: Siswa[] = await response.json();
       setSiswa(data);
     } catch (error) {
-      console.error(error);
+      setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -83,9 +83,8 @@ const SiswaPage = () => {
       fetchSiswa();
       setFormData({ name: "", nis: "", noHp: "" });
       setMessage("Siswa berhasil ditambah!");
-    } catch (err:any) {
-      setError(err.message);
-      setMessage(`Terjadi kesalahan: ${err.message}`);
+    } catch (error) {
+      setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -114,8 +113,7 @@ const SiswaPage = () => {
       setSuccess(true);
       setMessage("Siswa berhasil dihapus!");
     } catch (error) {
-      console.error("Terjadi kesalahan saat menghapus siswa:", error);
-      setMessage(`Terjadi kesalahan: ${error.message}`);
+      setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -171,9 +169,11 @@ const SiswaPage = () => {
           data={siswa}
           header={header}
           onDelete={openDeleteModal} 
+          onView={openDeleteModal}
         />
       </div>
 
+      {error && <CustomAlert type="error">{message}</CustomAlert>}
       {success && <CustomAlert type="success">{message}</CustomAlert>}
     </div>
   );

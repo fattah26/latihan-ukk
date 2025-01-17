@@ -49,9 +49,8 @@ export default function Home() {
         gender: "",
       });
       setMessage("Pendaftaran Berhasil");
-    } catch (err: any) {
-      setError(err.message);
-      setMessage(`Terjadi kesalahan: ${err.message}`);
+    } catch (error) {
+      setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -145,12 +144,12 @@ export default function Home() {
             onChange={handleChange}
           />
 
-          <CustomButton type="submit" size="large" disabled={loading}>
+          <CustomButton type="submit" size="large">
             {loading ? "Loading..." : "Kirim"}
           </CustomButton>
         </form>
-
-              {success && <CustomAlert type="success">{message}</CustomAlert>}
+        {error && <CustomAlert type="error">{message}</CustomAlert>}
+        {success && <CustomAlert type="success">{message}</CustomAlert>}
       </section>
     </div>
   );

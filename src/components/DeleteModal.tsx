@@ -22,33 +22,25 @@ export default function DeleteModal(props: DeleteProps) {
           isOpen ? "scale-100" : "scale-0"
         }`}
       >
-        <WarningIcon color="error" className="w-20 h-20"/>
+        <WarningIcon color="error" className="w-20 h-20" />
         <h2 className="font-bold text-xl mb-2">Delete Data</h2>
-          <p className="font-normal">
-            Are you sure you want to delete this data? This action cannot be
-            undone.
-          </p>
+        <p className="font-normal">
+          Are you sure you want to delete this data? This action cannot be
+          undone.
+        </p>
         <div className="flex w-full gap-3 justify-center mt-10">
-          <CustomButton onClick={onCancel} size="small" variant="outlined" color="error">
+          <CustomButton
+            onClick={onCancel}
+            size="small"
+            variant="outlined"
+            color="error"
+          >
             Cancel
           </CustomButton>
 
-          {isLoading ? (
-            <CustomButton
-              size="small"  
-              loading={true}
-              color="error"
-              variant="outlined"
-              loadingPosition="end"
-              type="submit"
-            >
-              Submit
-            </CustomButton>
-          ) : (
-            <CustomButton size="small" type="submit" color="error" onClick={onSubmit}>
-              Submit
-            </CustomButton>
-          )}
+          <CustomButton onClick={onSubmit} size="small" type="submit">
+            {isLoading ? "Loading" : "Submit"}
+          </CustomButton>
         </div>
       </div>
     </section>
