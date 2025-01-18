@@ -5,7 +5,7 @@ import CustomButton from "@/components/Button";
 import { useState } from "react";
 import CustomAlert from "@/components/Alert";
 
-export default function Home() {
+const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -154,3 +154,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
