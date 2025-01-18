@@ -17,8 +17,15 @@ interface Column {
   align?: "right" | "left" | "center";
 }
 
+interface Data {
+  id: number;
+  name: string;
+  nis: string;
+  noHp: string;
+}
+
 interface TableProps {
-  data: any[];
+  data: Data[];
   header: Column[];
   onDelete: (id: number) => void; 
   onView: (id: number) => void; 
@@ -54,7 +61,7 @@ export default function DynamicTable({
             {data.map((row, rowIndex) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={rowIndex}>
                 {header.map((column) => {
-                  const value = row[column.key];
+                  const value = row[column.key as keyof Data];
                   return (
                     <TableCell key={column.key} align={column.align || "left"}>
                       {value}

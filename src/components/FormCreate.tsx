@@ -1,14 +1,21 @@
 import { FIELD_CREATE } from "@/contans/index";
 import CustomButton from "./Button";
 
+interface formData {
+  name: string;
+  nis: string;
+  noHp: string;
+}
+
 interface FormProps {
   isOpen: boolean;
   onCancel: () => void;
   onSubmit: (e: React.FormEvent) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  formData: any;
+  formData: formData;
   isLoading: boolean;
 }
+
 
 export default function FormCreate(props: FormProps) {
   const { isOpen, onCancel, onSubmit, onChange, formData, isLoading } = props;
@@ -34,7 +41,7 @@ export default function FormCreate(props: FormProps) {
             <input
               type={form.type}
               name={form.name}
-              value={formData[form.name]} 
+              value={formData[form.name as keyof formData]}
               onChange={onChange}
               placeholder={form.placeholder}
               className="w-full border-gray-300 border rounded-md p-2"
