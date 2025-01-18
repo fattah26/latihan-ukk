@@ -16,7 +16,7 @@ interface Siswa {
 const SiswaPage = () => {
   const [siswa, setSiswa] = useState<Siswa[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -43,6 +43,7 @@ const SiswaPage = () => {
       const data: Siswa[] = await response.json();
       setSiswa(data);
     } catch (error) {
+      setError(true);
       setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
@@ -63,7 +64,6 @@ const SiswaPage = () => {
   const handleSubmitCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
     setSuccess(false);
 
     try {
@@ -84,6 +84,7 @@ const SiswaPage = () => {
       setFormData({ name: "", nis: "", noHp: "" });
       setMessage("Siswa berhasil ditambah!");
     } catch (error) {
+      setError(true);
       setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
@@ -93,7 +94,6 @@ const SiswaPage = () => {
   // Handle Delete
   const deleteSiswa = async () => {
     setLoading(true);
-    setError(null);
     setSuccess(false);
     try {
       const response = await fetch("/api/siswa", {
@@ -113,6 +113,7 @@ const SiswaPage = () => {
       setSuccess(true);
       setMessage("Siswa berhasil dihapus!");
     } catch (error) {
+      setError(true);
       setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);

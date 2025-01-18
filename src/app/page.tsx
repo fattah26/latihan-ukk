@@ -7,7 +7,7 @@ import CustomAlert from "@/components/Alert";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -23,7 +23,6 @@ export default function Home() {
   const handleSubmitCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
     setSuccess(false);
 
     try {
@@ -50,6 +49,7 @@ export default function Home() {
       });
       setMessage("Pendaftaran Berhasil");
     } catch (error) {
+      setError(true);
       setMessage(`Terjadi kesalahan: ${error}`);
     } finally {
       setLoading(false);
